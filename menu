@@ -65,7 +65,7 @@ echo -e "Host: $IP"
 echo -e "Port OpenSSH: 22,80"
 echo -e "Port Dropbear: 143,443"
 echo -e "Squid: 8080,3128"
-echo -e "Config OpenVPN (TCP 443): http://$IP:81/client.ovpn"
+echo -e "Config OpenVPN (TCP 443): http://$IP:85/client.ovpn"
 echo -e "Username: $Login "
 echo -e "Password: $Pass"
 echo -e "-----------------------------"
@@ -117,7 +117,7 @@ cd
 ;;
 5566 )
 rm -f /usr/local/bin/menu   
-wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/Menu"
 chmod +x /usr/local/bin/menu
 rm -f /usr/local/bin/Auto-Delete-Client
 wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
