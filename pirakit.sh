@@ -33,6 +33,14 @@ rm before.rules
 rm ufw
 systemctl restart openvpn
 
+#install squid3
+
+apt-get -y install squid;
+cp /etc/squid/squid.conf /etc/squid3/squid.conf.bak
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/jiraphaty/auto-script-vpn/master/squid.conf"
+sed -i $MYIP2 /etc/squid/squid.conf;
+systemctl restart squid
+
 cd /etc/openvpn/
 wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/client.ovpn"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
@@ -46,75 +54,33 @@ ufw allow 3128/tcp
 ufw allow 80/tcp
 yes | sudo ufw enable
 
-# install nginx
-echo ""
-echo -e " { install nginx }  "
-echo ""
-	cd
-	apt-get -y install nginx
-	cat > /etc/nginx/nginx.conf <<END
-user www-data;
-worker_processes 2;
-pid /var/run/nginx.pid;
-events {
-	multi_accept on;
-        worker_connections 1024;
-}
-http {
-	autoindex on;
-        sendfile on;
-        tcp_nopush on;
-        tcp_nodelay on;
-        keepalive_timeout 65;
-        types_hash_max_size 2048;
-        server_tokens off;
-        include /etc/nginx/mime.types;
-        default_type application/octet-stream;
-        access_log /var/log/nginx/access.log;
-        error_log /var/log/nginx/error.log;
-        client_max_body_size 32M;
-	client_header_buffer_size 8m;
-	large_client_header_buffers 8 8m;
-	fastcgi_buffer_size 8m;
-	fastcgi_buffers 8 8m;
-	fastcgi_read_timeout 600;
-        include /etc/nginx/conf.d/*.conf;
-}
-END
-	mkdir -p /home/vps/public_html
-	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
-	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
-	args='$args'
-	uri='$uri'
-	document_root='$document_root'
-	fastcgi_script_name='$fastcgi_script_name'
-	cat > /etc/nginx/conf.d/vps.conf <<END
-server {
-    listen       85;
-    server_name  127.0.0.1 localhost;
-    access_log /var/log/nginx/vps-access.log;
-    error_log /var/log/nginx/vps-error.log error;
-    root   /home/vps/public_html;
-    location / {
-        index  index.html index.htm index.php;
-	try_files $uri $uri/ /index.php?$args;
-    }
-    location ~ \.php$ {
-        include /etc/nginx/fastcgi_params;
-        fastcgi_pass  127.0.0.1:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-}
-END
 
 
 # download script
-        wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
-	chmod +x /usr/local/bin/menu
-	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
-	chmod +x /usr/local/bin/Auto-Delete-Client 
-	apt-get -y install vnstat
+cd /usr/bin
+wget -O member "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/member.sh"
+wget -O menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu.sh"
+wget -O usernew "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/usernew.sh"
+wget -O speedtest "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/speedtest_cli.py"
+wget -O userd "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/deluser.sh"
+wget -O trial "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/trial.sh"
+wget -O mutiply "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/mutiply.sh"
+wget -O proxy "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/proxy.sh"
+wget -O 443 "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/443.sh"
+wget -O update "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/update.sh"
+echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
+#echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
+chmod +x member
+chmod +x menu
+chmod +x usernew
+chmod +x speedtest
+chmod +x userd
+chmod +x trial
+chmod +x mutiply
+chmod +x proxr
+chmod +x 443
+chmod +x update
+clear
 
 
 # info
