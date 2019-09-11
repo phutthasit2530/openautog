@@ -33,7 +33,7 @@ echo ""
   echo -e "|${GRAY}02${NC}| ดูผู้ใช้ที่หมดอายุ"
   echo -e "|${GRAY}03${NC}| ลบผู้ใช้บัญชี ssh-vpn"
   echo -e "|${GRAY}20${NC}| เปลี่ยนพอต OPENVPN เป็น 443
-  echo -e "|${GRAY}00${NC}| Update MENU SCRIPT"
+  echo -e "|${GRAY}5566${NC}| Update MENU SCRIPT"
   echo ""
 1 | 01 )
 #!/bin/bash
@@ -115,12 +115,16 @@ service dropbear restart
 service squid3 restart
 cd
 ;;
-00 )
+5566 )
 rm -f /usr/local/bin/menu   
-wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
+wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
 chmod +x /usr/local/bin/menu
+rm -f /usr/local/bin/Auto-Delete-Client
+wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
+chmod +x /usr/local/bin/Auto-Delete-Client 
 menu
-;;
+
+	;;
  * )
 echo " รายการไม่ถูกต้อง "
 esac
