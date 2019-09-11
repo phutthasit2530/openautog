@@ -112,13 +112,6 @@ wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/MyGatherBk/pir
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
-# install webmin
-cd
-wget -O webmin-current.deb "http://www.webmin.com/download/deb/webmin-current.deb"
-dpkg -i --force-all webmin-current.deb;
-apt-get -y -f install;
-rm /root/webmin-current.deb
-service webmin restart
 
 ## download script
 cd /usr/bin
@@ -137,7 +130,7 @@ echo "-------"  | tee -a log-install.txt
 echo "OpenSSH  : 22, 80"  | tee -a log-install.txt
 echo "Dropbear : 443, 143"  | tee -a log-install.txt
 echo "Squid3   : 8080, 3128 (limit to IP SSH)"  | tee -a log-install.txt
-echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.ovpn)"  | tee -a log-install.txt
+echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:85/client.ovpn)"  | tee -a log-install.txt
 echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
 echo "nginx    : 81"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
