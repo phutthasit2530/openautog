@@ -119,11 +119,10 @@ service squid3 restart
 cd
 ;;
 00 )
-clear
-cd /usr/bin
-wget -q -O g "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
-chmod +x g
-g
+rm -f /usr/local/bin/menu   
+wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
+chmod +x /usr/local/bin/menu
+menu
 ;;
  * )
 echo " รายการไม่ถูกต้อง "
