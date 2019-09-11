@@ -35,9 +35,6 @@ echo ""
   echo -e "|${GRAY}20${NC}| เปลี่ยนพอต OPENVPN เป็น 443
   echo -e "|${GRAY}00${NC}| Update MENU SCRIPT"
   echo ""
-echo "-------------------------------------------------------" 
-echo ">>>>>    [ ระบบสคริป  : Pirakit Khawpleum ]        <<<<< " 
-echo "-------------------------------------------------------" 
 1 | 01 )
 #!/bin/bash
 #PIRAKIT-VPN
