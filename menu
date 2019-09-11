@@ -48,7 +48,6 @@ echo ""
 		fi
 	fi
   echo "|20| เปลี่ยนพอต OPENVPN เป็น 443
-  echo "| 0| Update MENU SCRIPT "
   echo ""
 1) # ==================================================================================================================
 #!/bin/bash
@@ -391,16 +390,6 @@ fi
 	;;
 
 
-0) # ==================================================================================================================
-rm -f /usr/local/bin/menu   
-wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
-chmod +x /usr/local/bin/menu
-rm -f /usr/local/bin/Auto-Delete-Client
-wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
-chmod +x /usr/local/bin/Auto-Delete-Client 
-menu
-
-	;;
  * )
 echo " รายการไม่ถูกต้อง "
 esac
