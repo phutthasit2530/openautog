@@ -27,15 +27,16 @@ echo "    #                                              #    "
 echo "    =============== OS-32 & 64-bit =================    "
 echo "    ไอพีเซิฟ:$IP "
 echo ""
-	echo -e "เมนูสคริปท์ ${GRAY}PIRAKIT-VPN${NC}"
-	echo ""
-  echo -e "|${GRAY}01${NC}| เพิ่มผู้ใช้ บัญชี ssh-vpn"
-  echo -e "|${GRAY}02${NC}| ดูผู้ใช้ที่หมดอายุ"
-  echo -e "|${GRAY}03${NC}| ลบผู้ใช้บัญชี ssh-vpn"
-  echo -e "|${GRAY}20${NC}| เปลี่ยนพอต OPENVPN เป็น 443
-  echo -e "|${GRAY}5566${NC}| Update MENU SCRIPT"
+  echo -e "เมนูสคริปท์ ${GRAY}PIRAKIT-VPN${NC} "
   echo ""
-1 | 01 )
+  echo "| 1| เพิ่มผู้ใช้ บัญชี ssh-vpn "
+  echo "| 2| ตรวจสอบบัญชีผู้ใช้-อายุ "
+  echo "| 3| ลบผู้ใช้บัญชี ssh-vpn "
+  echo "| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง "
+  echo "|20| เปลี่ยนพอต OPENVPN เป็น 443
+  echo "| 0| Update MENU SCRIPT "
+  echo ""
+1) # ==================================================================================================================
 #!/bin/bash
 #PIRAKIT-VPN
 echo ""
@@ -73,9 +74,30 @@ echo -e "ใช้งานได้จนถึง: $exp"
 echo -e "============================="
 echo -e "Mod by PIRAKIT-VPN"
 echo -e ""
-exit
 ;;
-3 | 03 )
+2) # ==================================================================================================================
+#!/bin/bash
+#PIRAKIT-VPN
+echo "-------------------------------"
+echo "USERNAME          EXP DATE     "
+echo "-------------------------------"
+while read expired
+do
+        AKUN="$(echo $expired | cut -d: -f1)"
+        ID="$(echo $expired | grep -v nobody | cut -d: -f3)"
+        exp="$(chage -l $AKUN | grep "Account expires" | awk -F": " '{print $2}')"
+        if [[ $ID -ge 1000 ]]; then
+        printf "%-17s %2s\n" "$AKUN" "$exp"
+        fi
+done < /etc/passwd
+JUMLAH="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
+echo "-------------------------------"
+echo "จำนวน user : $JUMLAH user"
+echo "-------------------------------"
+echo -e "Mod by PIRAKIT-VPN"
+echo -e ""
+;;
+3) # ==================================================================================================================
 #!/bin/bash
 #PIRAKIT-VPN
 
@@ -115,9 +137,91 @@ service dropbear restart
 service squid3 restart
 cd
 ;;
-5566 )
+4) # ==================================================================================================================
+
+clear
+echo ""
+echo ""
+echo " =============== OS-32 & 64-bit =================    "
+echo " #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo " #      -----------About Us------------         #    "
+echo " #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo " #       Truemoney Wallet : 096-746-2978        #    "
+echo " #               { VPN / SSH }                  #    "
+echo " #         BY : Pirakit Khawpleum               #    "
+echo " #    FB : https://m.me/pirakrit.khawplum       #    "
+echo " =============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+echo " ปรับเปลี่ยนระบบของเซิฟเวอร์ "
+echo ""
+echo "|1| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น สามารถสร้างไฟล์เพิ่มได้ "
+echo "|2| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องสร้างบัญชีเพื่อใช้เชื่อมต่อ "
+echo "|3| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดเครื่อง "
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " CHANGESYSTEMSERVER
+
+case $CHANGESYSTEMSERVER in
+
+	1)
+
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '20d' /etc/openvpn/client-common.txt
+echo "client-to-client" >> /etc/openvpn/server.conf
+echo ""
+echo " ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 1 เรียบร้อย "
+echo ""
+service openvpn restart
+
+	;;
+
+	2)
+
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '20d' /etc/openvpn/client-common.txt
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
+	echo "plugin /usr/lib/openvpn/openvpn-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
+	echo "client-cert-not-required" >> /etc/openvpn/server.conf
+	echo "username-as-common-name" >> /etc/openvpn/server.conf
+else
+	echo "plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
+	echo "client-cert-not-required" >> /etc/openvpn/server.conf
+	echo "username-as-common-name" >> /etc/openvpn/server.conf
+fi
+echo "auth-user-pass" >> /etc/openvpn/client-common.txt
+echo ""
+echo " ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 2 เรียบร้อย "
+echo ""
+service openvpn restart
+
+	;;
+
+	3)
+
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '20d' /etc/openvpn/client-common.txt
+echo "duplicate-cn" >> /etc/openvpn/server.conf
+echo ""
+echo " ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 3 เรียบร้อย "
+echo ""
+service openvpn restart
+
+	;;
+	
+esac
+
+	;;
+
+
+0) # ==================================================================================================================
 rm -f /usr/local/bin/menu   
-wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/Menu"
+wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
 chmod +x /usr/local/bin/menu
 rm -f /usr/local/bin/Auto-Delete-Client
 wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
