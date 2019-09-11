@@ -1,5 +1,6 @@
 # pirakit
- OpenSSH, port : 22, 80
+-
+- OpenSSH, port : 22, 80
 - Dropbear, port : 143, 443
 - Squid3, port : 8080, 3128 (limit to IP SSH)
 - Badvpn   : badvpn-udpgw port 7300
