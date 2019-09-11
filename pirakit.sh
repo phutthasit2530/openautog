@@ -1,73 +1,28 @@
 #!/bin/bash
-#
-# Script by PIRAKIT KHAWPLEUM
-# Telegram : @MyGatherBK
-# ==================================================
-# 
+#script by jiraphat yuenying for debian9
 
-# install sertifikat
-apt-get install ca-certificates
-
-#!/bin/bash
-
-if [[ "$EUID" -ne 0 ]]; then
-	echo ""
-	echo "กรุณาเข้าสู่ระบบผู้ใช้ root ก่อนทำการใช้งานสคริปท์"
-	echo "คำสั่งเข้าสู่ระบบผู้ใช้ root คือ sudo -i"
-	echo ""
-	exit
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
 fi
-
-if [[ ! -e /dev/net/tun ]]; then
-	echo ""
-	echo "TUN ไม่สามารถใช้งานได้"
-	exit
-fi
-
-# Set Localtime GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-
-clear
-# IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-# if [[ "$IP" = "" ]]; then
-IP=$(wget -4qO- "http://whatismyip.akamai.com/")
-# fi
-# install wget and curl
-apt-get update;apt-get -y install wget curl;
-
-# set locale
-sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
-service ssh restart
-
-
-# update
-apt-get update
 
 # install webserver
 apt-get -y install nginx
+#install openvpn
 
-# install essential package
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
-apt-get -y install build-essential
+apt-get purge openvpn easy-rsa -y;
+apt-get purge squid -y;
+apt-get purge ufw -y;
+apt-get update
+MYIP=$(wget -qO- ipv4.icanhazip.com);
+MYIP2="s/xxxxxxxxx/$MYIP/g";
 
-# disable exim
-service exim4 stop
-sysv-rc-conf exim4 off
-
-# update apt-file
-apt-file update
-
-# install figlet
-apt-get install figlet
-echo "clear" >> .bashrc
-echo 'figlet -k "$HOSTNAME"' >> .bashrc
-echo 'echo -e "Selamat datang ke server $HOSTNAME"' >> .bashrc
-echo 'echo -e "Script mod by Aiman Amir"' >> .bashrc
-echo 'echo -e "Taip menu untuk menampilkan senarai perintah yang tersedia"' >> .bashrc
-echo 'echo -e ""' >> .bashrc
+apt-get update
+apt-get install bc -y
+apt-get -y install openvpn easy-rsa;
+apt-get -y install python;
 
 # install webserver
-cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/nginx.conf"
@@ -76,55 +31,31 @@ echo "<pre>Setup by Aiman Amir | 081515292117</pre>" > /home/vps/public_html/ind
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/vps.conf"
 service nginx restart
 
-# install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/openvpn.tar"
+wget -O /etc/openvpn/default.tar "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/default.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/1194.conf"
-service openvpn restart
-sysctl -w net.ipv4.ip_forward=1
-sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-iptables -t nat -I POSTROUTING -s 192.168.100.0/24 -o eth0 -j MASQUERADE
-iptables-save > /etc/iptables_yg_baru_dibikin.conf
-wget -O /etc/network/if-up.d/iptables "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/iptables"
-chmod +x /etc/network/if-up.d/iptables
-service openvpn restart
+tar xf default.tar
+cp sysctl.conf /etc/
+cp before.rules /etc/ufw/
+cp ufw /etc/default/
+rm sysctl.conf
+rm before.rules
+rm ufw
+systemctl restart openvpn
 
-# konfigurasi openvpn
 cd /etc/openvpn/
-wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/client-1194.conf"
+wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/client.ovpn"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
-cp client.ovpn /home/vps/public_html/
+cp client.ovpn /root/
 
-cd
-# install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/badvpn-udpgw"
-if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/badvpn-udpgw"
-fi
-sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
-chmod +x /usr/bin/badvpn-udpgw
-screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
-cd
-
-# setting port ssh
-sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port 80' /etc/ssh/sshd_config
-service ssh restart
-
-# install dropbear
-apt-get -y install dropbear
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=443/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 443 -p 143"/g' /etc/default/dropbear
-echo "/bin/false" >> /etc/shells
-echo "/usr/sbin/nologin" >> /etc/shells
-service ssh restart
-service dropbear restart
-cd
-
-# install fail2ban
-apt-get -y install fail2ban;service fail2ban restart
+#N | apt-get install ufw
+ufw allow ssh
+ufw allow 1194/tcp
+ufw allow 8080/tcp
+ufw allow 3128/tcp
+ufw allow 80/tcp
+yes | sudo ufw enable
 
 # install squid3
 apt-get -y install squid3
@@ -142,8 +73,8 @@ service webmin restart
 
 ## download script
 cd /usr/bin
-wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
-chmod +x /usr/local/bin/menu
+wget -q -O g "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
+wget -q -O speedtest "https://raw.githubusercontent.com/MyGatherBk/aungwin/master/speedtest"
 wget -q -O b-user "https://raw.githubusercontent.com/MyGatherBk/aungwin/master/b-user"
 
 # finishing
