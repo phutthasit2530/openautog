@@ -1,4 +1,4 @@
-cd /usr/bin
+rm -f /usr/bin
 wget -O member "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/member.sh"
 wget -O menu "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu.sh"
 wget -O usernew "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/usernew.sh"
