@@ -6,8 +6,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# install webserver
-apt-get -y install nginx
 #install openvpn
 
 apt-get purge openvpn easy-rsa -y;
@@ -21,15 +19,66 @@ apt-get update
 apt-get install bc -y
 apt-get -y install openvpn easy-rsa;
 apt-get -y install python;
-
-# install webserver
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/nginx.conf"
-mkdir -p /home/vps/public_html
-echo "<pre>Setup by Aiman Amir | 081515292117</pre>" > /home/vps/public_html/index.html
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/vps.conf"
-service nginx restart
+echo ""
+echo -e "\033[35;1m { install nginx }  "
+echo ""
+	cd
+	apt-get -y install nginx
+	cat > /etc/nginx/nginx.conf <<END
+user www-data;
+worker_processes 2;
+pid /var/run/nginx.pid;
+events {
+	multi_accept on;
+        worker_connections 1024;
+}
+http {
+	autoindex on;
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        server_tokens off;
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+        client_max_body_size 32M;
+	client_header_buffer_size 8m;
+	large_client_header_buffers 8 8m;
+	fastcgi_buffer_size 8m;
+	fastcgi_buffers 8 8m;
+	fastcgi_read_timeout 600;
+        include /etc/nginx/conf.d/*.conf;
+}
+END
+	mkdir -p /home/vps/public_html
+	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
+	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
+	args='$args'
+	uri='$uri'
+	document_root='$document_root'
+	fastcgi_script_name='$fastcgi_script_name'
+	cat > /etc/nginx/conf.d/vps.conf <<END
+server {
+    listen       85;
+    server_name  127.0.0.1 localhost;
+    access_log /var/log/nginx/vps-access.log;
+    error_log /var/log/nginx/vps-error.log error;
+    root   /home/vps/public_html;
+    location / {
+        index  index.html index.htm index.php;
+	try_files $uri $uri/ /index.php?$args;
+    }
+    location ~ \.php$ {
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass  127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
+END
 
 wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/openvpn.tar"
 wget -O /etc/openvpn/default.tar "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/default.tar"
@@ -77,18 +126,6 @@ wget -q -O g "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
 wget -q -O speedtest "https://raw.githubusercontent.com/MyGatherBk/aungwin/master/speedtest"
 wget -q -O b-user "https://raw.githubusercontent.com/MyGatherBk/aungwin/master/b-user"
 
-# finishing
-cd
-chown -R www-data:www-data /home/vps/public_html
-service nginx start
-service openvpn restart
-service cron restart
-service ssh restart
-service dropbear restart
-service squid3 restart
-service webmin restart
-rm -rf ~/.bash_history && history -c
-echo "unset HISTFILE" >> /etc/profile
 
 # info
 clear
