@@ -4,12 +4,13 @@
 - Dropbear, port : 143, 443
 - Squid3, port : 8080, 3128 (limit to IP SSH)
 - Badvpn   : badvpn-udpgw port 7300
-- Webmin   : http://IPVPS:10000/
-- Nginx    : 81
+- Nginx    : 85
 - OpenVPN TCP 1194
-- Script menu : g
+- Script menu : z
 -
 
 Auto-Install Script :-
-
-apt-get install wget && wget https://raw.githubusercontent.com/MyGatherBk/pirakit/master/pirakit.sh && ./pirakit.sh
+sudo -i
+wget https://raw.githubusercontent.com/MyGatherBk/pirakit/master/pirakit.sh
+chmod +x pirakit.sh
+./pirakit.sh
