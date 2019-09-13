@@ -1,12 +1,11 @@
 # pirakit
 -
 - OpenSSH, port : 22, 80
-- Dropbear, port : 143, 443
-- Squid3, port : 8080, 3128 (limit to IP SSH)
-- Badvpn   : badvpn-udpgw port 7300
+- Dropbear, port : 143, 444
+- Squid3, port : 8080, 3128
 - Nginx    : 85
-- OpenVPN TCP 1194
-- Script menu : z
+- OpenVPN TCP 1194 Edit Port 443
+- Script menu : g
 -
 
 Auto-Install Script :-
