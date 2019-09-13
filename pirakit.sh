@@ -1,5 +1,4 @@
 
-  
 #!/bin/bash
 
 clear
@@ -120,7 +119,7 @@ fi
 
 ok "➡ Generating CA Config"
 cd /
-wget -q -O ovpn.tar "https://raw.githubusercontent.com/MyGatherBk/aungwin/master/openvpn.tar"
+wget -q -O ovpn.tar "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/openvpn.tar"
 tar xf ovpn.tar
 rm ovpn.tar
 
@@ -595,9 +594,9 @@ service ssh restart
  
 # download script
 cd /usr/bin
-wget -q -O g "https://raw.githubusercontent.com/MyGatherBk/aungwin/master/menu"
-wget -q -O speedtest "https://raw.githubusercontent.com/MyGatherBk/aungwin/master/speedtest"
-wget -q -O b-user "https://raw.githubusercontent.com/MyGatherBk/aungwin/master/b-user"
+wget -q -O g "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/menu"
+wget -q -O speedtest "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/speedtest"
+wget -q -O b-user "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/b-user"
 
 
 echo "30 3 * * * root /sbin/reboot" > /etc/cron.d/reboot
@@ -618,56 +617,25 @@ clear
 # ads
 echo ""
 echo ""
-echo "    =============== OS-32 & 64-bit =================    "
-echo "    #                                              #    "
-echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "    #      -----------About Us------------         #    "
-echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16      #    "
-echo "    #    Truemoney Wallet : 096-746-2978           #    "
-echo "    #               { VPN / SSH }                  #    "
-echo "    #                  NAMNUEA                     #    "
-echo "    #         BY : Pirakit Khawpleum               #    "
-echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "    #                                              #    "
-echo "    =============== OS-32 & 64-bit =================    "
-echo ""
-echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
-echo ""
-echo " ไอพีเซิฟ:$IP "
-echo ""
-echo ""
-----------------------------------------------
-[√] INSTALL SUCCESS ^^
-[√] การติดตั้งเสร็จสมบรูณ์ .....
-[√] OK .....
-----------------------------------------------"
-echo ""
-echo ""
-echo -e "\e[32m    ##############################################################    "
-echo -e "\e[32m    #                                                            #    "
-echo -e "\e[32m    #      >>>>> [ ระบบสคริป :PRATYASART THEEJANMART ] <<<<<       #    "
-echo -e "\e[32m    #                                                            #    "
-echo -e "\e[32m    #             SYSTEM MANAGER VPN SSH                         #    "
-echo -e "\e[32m    #                                                            #    "
-echo -e "\e[32m    #    Dropbear       :   22, 443                              #    "
-echo -e "\e[32m    #    SSL            :   444                                  #    "
-echo -e "\e[32m    #    Squid3         :   3128, 8080                           #    "
-echo -e "\e[32m    #    OpenVPN        :   TCP 1194 [Edit] TCP 443              #    "
-echo -e "\e[32m    #    Nginx          :   85                                   #    "
-echo -e "\e[32m    #                                                            #    "
-echo -e "\e[32m    #             LIMIT SETTINGS VPN SSH                         #    "
-echo -e "\e[32m    #                                                            #    "
-echo -e "\e[32m    #    Timezone       :   Asia/Bangkok                         #    "
-echo -e "\e[32m    #    IPV6           :   [OFF]                                #    "
-echo -e "\e[32m    #    Cron Scheduler :   [ON]                                 #    "
-echo -e "\e[32m    #    Fail2Ban       :   [ON]                                 #    "
-echo -e "\e[32m    #    DDOS Deflate   :   [ON]                                 #    "
-echo -e "\e[32m    #    LibXML Parser  :   [ON]                                 #    "
-echo -e "\e[32m    #                                                            #    "
-echo -e "\e[32m    #    ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง    g เพื่อไปยังขั้นตอนถัดไป         #    "
-echo -e "\e[32m    #                                                            #    "
-echo -e "\e[32m    ##############################################################    "
-echo -e "\e[0m                                                                       "
+echo -e "\e[32m    =====================================================  "
+echo -e "\e[32m    #                                                   #    "
+echo -e "\e[32m    #             SYSTEM MANAGER VPN SSH                #    "
+echo -e "\e[32m    #                                                   #    "
+echo -e "\e[32m    #    IP             :   $IP                         #    "
+echo -e "\e[32m    #    Dropbear       :   22, 443                     #    "
+echo -e "\e[32m    #    SSL            :   444                         #    "
+echo -e "\e[32m    #    Squid3         :   3128, 8080                  #    "
+echo -e "\e[32m    #    OpenVPN        :   TCP 1194 [Edit] TCP 443     #    "
+echo -e "\e[32m    #    Nginx          :   85                          #    "
+echo -e "\e[32m    #                                                   #    "
+echo -e "\e[32m    #  [√] INSTALL SUCCESS ^^                           #    " 
+echo -e "\e[32m    #  [√] การติดตั้งเสร็จสมบรูณ์ .....                       #    "
+echo -e "\e[32m    #  [√] OK .....                                     #    "
+echo -e "\e[32m    #                                                   #    "
+echo -e "\e[32m    #  ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง   g เพื่อไปยังขั้นตอนถัดไป  #    "
+echo -e "\e[32m    #                                                   #    "
+echo -e "\e[32m    ================================= ====================  "
+echo -e "\e[0m         ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~        "
 read -n1 -r -p "                Press Enter To Show Commands                         "
 g
 
