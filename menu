@@ -4662,7 +4662,7 @@ echo "       ┣━━━━━━━━━━━━━━━━━━━━━�
 read -p "    ╰━━ Namber : " opcao
 case $opcao in
 1 )
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 panel() {
 clear
 clear
