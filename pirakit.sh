@@ -1,23 +1,4 @@
-Skip to content
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@MyGatherBk 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-1
-00MyGatherBk/aungwin
- Code Issues 0 Pull requests 0 Projects 0 Wiki Security Insights Settings
-aungwin/install.sh
-@MyGatherBk MyGatherBk Update install.sh
-a2c712f 19 days ago
-686 lines (616 sloc)  19.1 KB
   
 #!/bin/bash
 
@@ -683,25 +664,13 @@ echo -e "\e[32m    #    Fail2Ban       :   [ON]                                 
 echo -e "\e[32m    #    DDOS Deflate   :   [ON]                                 #    "
 echo -e "\e[32m    #    LibXML Parser  :   [ON]                                 #    "
 echo -e "\e[32m    #                                                            #    "
-echo -e "\e[32m    #    ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง    z เพื่อไปยังขั้นตอนถัดไป         #    "
+echo -e "\e[32m    #    ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง    g เพื่อไปยังขั้นตอนถัดไป         #    "
 echo -e "\e[32m    #                                                            #    "
 echo -e "\e[32m    ##############################################################    "
 echo -e "\e[0m                                                                       "
 read -n1 -r -p "                Press Enter To Show Commands                         "
-z
+g
 
 cd
 rm -f install
 rm -f /root/install_openvpn
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
