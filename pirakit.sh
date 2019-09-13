@@ -91,11 +91,7 @@ echo "    #         BY : Pirakit Khawpleum               #    "
 echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "    #                                              #    "
 echo "    =============== OS-32 & 64-bit =================    "
-echo ""
-echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
-echo ""
-echo " ไอพีเซิฟ:$IP "
-echo ""
+echo "    ไอพีเซิฟ:$IP "
 echo ""
 # Install openvpn
 cd
@@ -106,9 +102,9 @@ echo "
 [√] Loading .....
 ----------------------------------------------
  "
-ok "➡ apt-get update"
+ok "➡ apt-get update "
 apt-get update -q > /dev/null 2>&1
-ok "➡ apt-get install openvpn curl openssl"
+ok "➡ apt-get install openvpn curl openssl "
 apt-get install -qy openvpn curl > /dev/null 2>&1
 
 # IP Address
@@ -117,7 +113,7 @@ if [[ "$SERVER_IP" = "" ]]; then
     SERVER_IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | grep -v '192.168'`;
 fi
 
-ok "➡ Generating CA Config"
+ok "➡ Generating CA Config "
 cd /
 wget -q -O ovpn.tar "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/openvpn.tar"
 tar xf ovpn.tar
@@ -333,12 +329,12 @@ script-security 3
 aisplay
 
 # Restart Service
-ok "➡ service openvpn restart"
+ok "➡ service openvpn restart "
 service openvpn restart > /dev/null 2>&1
 
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 #install squid3
-ok "➡ apt-get install squid3"
+ok "➡ apt-get install squid3 "
 apt-get install -qy squid3 > /dev/null 2>&1
 cp /etc/squid3/squid.conf /etc/squid3/squid.conf.orig
 echo "http_port 8080
@@ -369,12 +365,12 @@ refresh_pattern ^ftp:           1440    20%     10080
 refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320" > /etc/squid3/squid.conf
-ok "➡ service squid3 restart"
+ok "➡ service squid3 restart "
 service squid3 restart -q > /dev/null 2>&1
 
 elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
 #install squid3
-ok "➡ apt-get install squid"
+ok "➡ apt-get install squid "
 apt-get install -qy squid > /dev/null 2>&1
 cp /etc/squid/squid.conf /etc/squid/squid.conf.orig
 cat > /etc/squid/squid.conf <<END
@@ -407,14 +403,14 @@ refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
-ok "➡ service squid restart"
+ok "➡ service squid restart "
 service squid restart -q > /dev/null 2>&1
 fi
 
 
 
 #install Nginx
-ok "➡ apt-get install nginx"
+ok "➡ apt-get install nginx "
 	apt-get -y install nginx
 	cat > /etc/nginx/nginx.conf <<END
 user www-data;
@@ -471,25 +467,25 @@ server {
     }
 }
 END
-ok "➡ service nginx restart"
+ok "➡ service nginx restart "
 
 #install php-fpm
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 
 #debian8
-ok "➡ apt-get install php"
+ok "➡ apt-get install php "
 apt-get install -qy php5-fpm > /dev/null 2>&1
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 apt-get install -qy php5-curl > /dev/null 2>&1
-ok "➡ service php restart"
+ok "➡ service php restart "
 service php5-fpm restart -q > /dev/null 2>&1
 elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' ]]; then
 #debian9 Ubuntu16.4
-ok "➡ apt-get install php"
+ok "➡ apt-get install php "
 apt-get install -qy php7.0-fpm > /dev/null 2>&1
 sed -i 's/listen = \/run\/php\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
 apt-get install -qy php7.0-curl > /dev/null 2>&1
-ok "➡ service php restart"
+ok "➡ service php restart "
 service php7.0-fpm restart > /dev/null 2>&1
 fi
 
@@ -497,11 +493,11 @@ fi
 cd
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 443' /etc/ssh/sshd_config
-ok "➡ service ssh restart"
+ok "➡ service ssh restart "
 service ssh restart > /dev/null 2>&1
 
 # install dropbear
-ok "➡ apt-get install dropbear"
+ok "➡ apt-get install dropbear "
 apt-get install -qy dropbear > /dev/null 2>&1
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=3128/g' /etc/default/dropbear
@@ -514,7 +510,7 @@ service dropbear restart > /dev/null 2>&1
 
 
 # install stunnel
-ok "➡ apt-get install ssl"
+ok "➡ apt-get install ssl "
 apt-get install -qy stunnel4 > /dev/null 2>&1
 cat > /etc/stunnel/stunnel.conf <<-END
 cert = /etc/stunnel/stunnel.pem
@@ -532,11 +528,11 @@ cat /etc/openvpn/client-key.pem /etc/openvpn/client-cert.pem > /etc/stunnel/stun
 
 #konfigurasi stunnel
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-ok "➡ service ssl restart"
+ok "➡ service ssl restart "
 service stunnel4 restart > /dev/null 2>&1
 
 # install vnstat gui
-ok "➡ apt-get install vnstat"
+ok "➡ apt-get install vnstat "
 apt-get install -qy php5-fpm > /dev/null 2>&1
 chown -R vnstat:vnstat /var/lib/vnstat
 cd /home/vps/public_html
@@ -558,11 +554,11 @@ sed -i "s/eth0/ens3/g" /home/vps/public_html/bandwidth/config.php
 vnstat -u -i ens3
 fi
 
-ok "➡ service vnstat restart"
+ok "➡ service vnstat restart "
 service vnstat restart -q > /dev/null 2>&1
 
 # Iptables
-ok "➡ apt-get install iptables"
+ok "➡ apt-get install iptables "
 apt-get install -qy iptables > /dev/null 2>&1
 if [ -e '/var/lib/vnstat/eth0' ]; then
 iptables -t nat -I POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
@@ -607,7 +603,7 @@ service cron restart -q > /dev/null 2>&1
 
 
 # XML Parser
-ok "➡ apt-get install XML Parser"
+ok "➡ apt-get install XML Parser "
 cd
 apt-get -y --force-yes -f install libxml-parser-perl
 
