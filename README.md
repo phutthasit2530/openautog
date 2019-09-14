@@ -11,4 +11,4 @@
 Auto-Install Script :
 -
 - sudo -i
-- wget https://raw.githubusercontent.com/MyGatherBk/pirakit/master/install.sh && chmod +x pirakit.sh && bash pirakit.sh
+- wget https://raw.githubusercontent.com/MyGatherBk/pirakit/master/pirakit.sh && chmod +x pirakit.sh && bash pirakit.sh
