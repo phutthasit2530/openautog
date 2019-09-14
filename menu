@@ -9,14 +9,18 @@ IP=$(wget -qO- ipv4.icanhazip.com);
 if [[ "$IP" = "" ]]; then
 IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | grep -v '192.168'`;
 fi
-# Functions
-z1='\e[31;1m'  #red
-z2='\e[34;1m'  #blue
-z3='\e[32;1m'  #green
-z4='\e[35;1m'  #magenta
-z5='\e[36;1m'  #cyan
-z6='\e[33;1m'  #yellow
-z7='\e[0m'
+
+
+
+# Color
+GRAY='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+YELLOW='\033[33;1m'
+RED='\033[31;1m'
+BLUE='\033[34;1m'
+MAGENTA='\033[35;1m'
+CYAN='\033[36;1m'
 
 ok() {
     echo -e '\e[32m'$1'\e[m';
@@ -111,9 +115,7 @@ echo "   { 32 } ลิ้งต่างๆ "
 echo "   ------------------------------------------------------- " 
 echo "   ||||||||||||||||| WEBAPNEL VPN SSH |||||||||||||||||||| " 
 echo "   ------------------------------------------------------- " 
-echo "   { 33 } ติดตั้ง Databest  DE 9 UBUN 14.04 "
-echo "   { 34 } ติดตั้ง WEBMIN  "
-echo "   { 35 } เปลี่ยนพอต เป็น 443  "
+echo "   { 33 } เปลี่ยนพอต เป็น 443  "
 echo "   { 00 } Update MENU Script  "
 echo "   ------------------------------------------------------- " 
 
@@ -4630,279 +4632,6 @@ echo -e "\e[0m                                                                  
 exit
 ;;
 33 )# ==================================================================================================================
-#!/bin/bash
-#DEV BY PRATYASART THEEJANMART
-clear
-clear
-echo ""
-echo ""
-echo "    =============== OS-32 & 64-bit =================    "
-echo "    #                                              #    "
-echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "    #      -----------About Us------------         #    "
-echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16      #    "
-echo "    #    Truemoney Wallet : 096-746-2978           #    "
-echo "    #               { VPN / SSH }                  #    "
-echo "    #                  NAMNUEA                     #    "
-echo "    #         BY : Pirakit Khawpleum               #    "
-echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "    #                                              #    "
-echo "    =============== OS-32 & 64-bit =================    "
-echo "    ไอพีเซิฟ:$IP "
-echo ""
-echo "             ╭━━━━━━━━━━━━━━━━━━━━━━━╮"
-echo "             ┣ เลือกระบบที่จะติดตั้ง Scrip      "
-echo "       ╰━━━┳━━━━━━━━━━━┳━━━━━━━╯"
-echo "       ╭━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━╮"
-echo "       ┃ ใส่ตัวเลขแล้วกด enter"
-echo "       ┣━━━━━━━━━━━━━━━━━╯"
-echo "       ┣ 1. ติดตั้งเว็บ Panel      "
-echo "       ┣ 2. เพิ่มไฟล์ OpenVPN ลงในเว็บ       "
-echo "       ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯"
-read -p "    ╰━━ Namber : " opcao
-case $opcao in
-1 )
-if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-panel() {
-clear
-clear
-echo ""
-echo ""
-echo "    =============== OS-32 & 64-bit =================    "
-echo "    #                                              #    "
-echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "    #      -----------About Us------------         #    "
-echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16      #    "
-echo "    #    Truemoney Wallet : 096-746-2978           #    "
-echo "    #               { VPN / SSH }                  #    "
-echo "    #                  NAMNUEA                     #    "
-echo "    #         BY : Pirakit Khawpleum               #    "
-echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "    #                                              #    "
-echo "    =============== OS-32 & 64-bit =================    "
-echo "    ไอพีเซิฟ:$IP "
-echo ""
-echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮"
-echo " ┈ 🔘🔘🔘 ข้อมูลติดตั้ง web panel  🔘🔘🔘"
-echo " ┈╰━━┳━━━━━━━━━━┳━━━━━━━━╯"
-echo " ┈╭━━┻━━━━━━━━━━┻━━━━━━━━╮"
-echo " ┈┣ 🔖🔖 ลิ้งติดตั้ง web panel   "
-echo " ┈┣ 🔖🔖 http://$IP/install    "
-echo " ┈┣━━━━━━━━━━━━━━━━━┫"
-echo " ┈┣ 🔖🔖 ข้อมูลติดตั้ง     "
-echo " ┈┣ 🔖🔖 username : root     "
-echo " ┈┣ 🔖🔖 password : ที่กำหนดใว้ตอนรัน        "
-echo " ┈┣ 🔖🔖 Database Name : ยังไม่ไก้กำหนด          "
-echo " ┈╰━━┳━━━━━━━━━━┳━━━━━━━━╯"
-echo " ┈╭━━┻━━━━━━━━━━┻━━━━━━━━╮"
-echo " ┈┣ 🔖🔖 ลิ้งเข้าเว็บเมื่อติดตั้งเสร็จ               "
-echo " ┈┣ 🔖🔖 http://$IP/login/login "
-echo " ┈╰━━┳━━━━━━━━━━┳━━━━━━━━╯"
-echo " ┈╭━━┻━━━━━━━━━━┻━━━━━━━━╮"
-echo " ┈┣ 🔖🔖 ลิ้งติดตั้ง ขั้นสูง ผ่าน phpmy_admin               "
-echo " ┈┣ 🔖🔖 ไม่แนะนำ 🔞🔞🔞🔞🔞            "
-echo " ┈┣ 🔖🔖 http://$IP/phpmyadmin   "
-echo " ┈╰━━━━━━━━━━━━━━━━━━━━━━╯"
-        exit
-        }
-        
-if [ -d /home/vps/public_html/application ]; then
-panel
-else
-apt update
-apt-get install -qy php5-mysql
-apt-get install -qy mysql-server
-mysql_secure_installation
-apt-get install -qy phpmyadmin
-apt-get install -qy unzip
-cd /home/vps/public_html/
-wget -q -O test ระบบสคริป FB : Ekkachai Chompoowiset
-tar xf test
-echo "NoInstall" > application/config/database.php
-chmod 777 application/config/database.php
-rm -f teste
-rm -f index.html
-wget -q -O admin.zip https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
-unzip admin.zip > /dev/null 2>&1
-rm -f admin.zip
-mv phpMyAdmin-4.8.3-all-languages phpmyadmin
-apt-get install -y curl
-apt-get install -qy php5-curl
-fi
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
-clear
-echo "  ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮ 
-        ┣ สามารถติดตั้งได้แค่ OS Debian7-8 Ubuntu14.4
-        ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
- "
-
-fi
-exit
-;;
-2)
-if [ -d /home/vps/public_html/ovpn ]; then
-echo
-else
-mkdir /home/vps/public_html/ovpn
-fi
-clear
-clear
-echo "    ╭━━━━━━━━━━━━━━━━━━━━━━━━━╮"
-echo "    ┣ ติดตั้งไฟล์ Ovpn ลง Panel      "
-echo "    ┣━━━━━━━━━━━━━━━━━━━━━━━━━╯"
-read -p " ┣ Host/IP    : " Host
-read -p " ┣ ใส่เพโหลด  : " payload
-read -p " ┣ ตั้งชื่อไฟล์   : " Name
-read -p " ╰ ต้องการบันทึกหรือไม่ y/n  : " Edit
-if [[ "$Edit" = "y" || "$Edit" = "Y" ]]; then
-if [ -e /home/vps/public_html/ovpn/$Name.ovpn ]; then
-clear
-clear
-echo "    ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━╮"
-echo "    ┣ $Name มีชื่ออยู่ในระบบแล้ว      "
-echo "    ╰━━━┳━━━━━━━━━━━┳━━━━━━━━━━━╯"
-echo "    ╭━━━┻━━━━━━━━━━━┻━━━━━━━━━╮"
-echo "    ┃ ต้องการติดตั้งทับไฟล์เดิมหรือไม่   "
-echo "    ┣━━━━━━━━━━━━━━━━━━━━━━━━━╯"
-read -p " ╰━━  {y/n} : " Enter
-if [[ "$Enter" = "y" || "$Enter" = "Y" ]]; then
-clear
-clear
-elif [[ "$Enter" = "$Enter" ]]; then
-clear
-clear
-echo "     ╭━━━━━━━━━━━━━━━━━━━━━━╮ 
-           ┣ ยกเลิกการตั้งค่าไฟล์
-           ╰━━━━━━━━━━━━━━╯
- "
-exit 0
-fi
-else
-echo zenonnew
-fi
-grep -E "^proto tcp" /etc/openvpn/1194.conf >/dev/null
-if [ $? -eq 0 ]; then
-proto="proto tcp"
-if [[ "$payload" = "" ]]; then
-remote="remote $Host 1194"
-else
-remote="remote $Host:1194@$payload 1194"
-fi
-proxy="http-proxy $Host 8080"
-remote1="remote scrip_xxx 999 udp"
-
-else
-proto="proto udp"
-remote="remote $Host 1194"
-fi
-
-cat > /home/vps/public_html/ovpn/$Name.ovpn <<-zenonnew
-auth-user-pass
-client
-dev tun
-$proto
-$remote1
-$remote
-$proxy
-connect-retry 1
-connect-timeout 120
-resolv-retry infinite
-route-method exe
-nobind
-ping 5
-ping-restart 30
-persist-key
-persist-tun
-persist-remote-ip
-mute-replay-warnings
-verb 3
-cipher none
-comp-lzo
-script-security 3
-
-<key>
-$(cat /etc/openvpn/client-key.pem)
-</key>
-<cert>
-$(cat /etc/openvpn/client-cert.pem)
-</cert>
-<ca>
-$(cat /etc/openvpn/ca.pem)
-</ca>
-zenonnew
-
-clear
-clear
-echo "  ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        ┣ สร้างไฟล์เรียบร้อย
-        ┣ โปรดนำลิ้งด้านล่างไปตั้งค่าเพิ่มไฟล์ในเว็บ      
-        ┣ เข้าเว็บไซต์ > ตั้งค่า > เพิ่มไฟล์Ovpn
-        ┣ LinkDownload  : http://$IP/ovpn/$Name.ovpn
-        ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- "
-exit 0
-elif [[ "$Edit" = "$Edit" ]]; then
-clear
-clear
-echo "     ╭━━━━━━━━━━━━━━━━━━━━━━╮ 
-           ┣ ไม่ได้บันทึกการตั้งค่า
-           ╰━━━━━━━━━━━━━━╯
- "
-exit 0
-fi
-;;
-$opcao )
-clear
-clear
-echo -e "${z1}  ╭━━━━━━━━━━━━━━━━━━━━━━╮ 
-                ┣    พิมพ์คำสั่งไม่ถูกต้อง
-                ╰━━━━━━━━━━━━━━━━━━━━━━╯${z7}"
-echo -e ""
-exit 0
-esac
-;; 
-34)# ==================================================================================================================
-#!/bin/bash
-#DEV BY PRATYASART THEEJANMART
-# install webmin
-clear
-clear
-echo ""
-echo ""
-echo "    =============== OS-32 & 64-bit =================    "
-echo "    #                                              #    "
-echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "    #      -----------About Us------------         #    "
-echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16      #    "
-echo "    #    Truemoney Wallet : 096-746-2978           #    "
-echo "    #               { VPN / SSH }                  #    "
-echo "    #                  NAMNUEA                     #    "
-echo "    #         BY : Pirakit Khawpleum               #    "
-echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "    #                                              #    "
-echo "    =============== OS-32 & 64-bit =================    "
-echo "    ไอพีเซิฟ:$IP "
-echo ""
-ok "➡ apt-get install webmin"
-cd
-wget "http://script.hostingtermurah.net/repo/webmin_1.801_all.deb"
-dpkg --install webmin_1.801_all.deb;
-apt-get -y -f install;
-sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
-rm /root/webmin_1.801_all.deb
-service webmin restart
-
-ok "➡ apt-get update"
-apt-get update -q > /dev/null 2>&1
-service openvpn restart -q > /dev/null 2>&1
-clear
-echo -e "${z3}  ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮ 
-                ┣    ติดตั้ง WEBMIN สำเร็จ
-                ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯${z7}"
-echo -e ""
-exit
-;;
-35 )# ==================================================================================================================
 cd /usr/bin
 #DEV BY PRATYASART THEEJANMART
 cp /etc/openvpn/1194.conf /home/1194ori.conf
