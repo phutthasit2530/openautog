@@ -31,7 +31,25 @@ clear
 cd
 echo
 
+# Color
+GRAY='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+YELLOW='\033[33;1m'
+RED='\033[31;1m'
+BLUE='\033[34;1m'
+MAGENTA='\033[35;1m'
+CYAN='\033[36;1m'
+
 # Functions
+z1='\e[31;1m'  #red
+z2='\e[34;1m'  #blue
+z3='\e[32;1m'  #green
+z4='\e[35;1m'  #magenta
+z5='\e[36;1m'  #cyan
+z6='\e[33;1m'  #yellow
+z7='\e[0m'
+
 ok() {
     echo -e '\e[32m'$1'\e[m';
 }
@@ -79,19 +97,19 @@ clear
 # ads
 echo ""
 echo ""
-echo "    =============== OS-32 & 64-bit =================    "
-echo "    #                                              #    "
-echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "    #      -----------About Us------------         #    "
-echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16      #    "
-echo "    #    Truemoney Wallet : 096-746-2978           #    "
-echo "    #               { VPN / SSH }                  #    "
-echo "    #                  NAMNUEA                     #    "
-echo "    #         BY : Pirakit Khawpleum               #    "
-echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "    #                                              #    "
-echo "    =============== OS-32 & 64-bit =================    "
-echo "    ไอพีเซิฟ:$IP "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
 echo ""
 # Install openvpn
 cd
@@ -610,7 +628,21 @@ apt-get -y --force-yes -f install libxml-parser-perl
 
 clear
 clear
-# ads
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
 echo ""
 echo ""
 echo -e "\e[32m    =====================================================  "
@@ -631,7 +663,7 @@ echo -e "\e[32m    #                                                   #    "
 echo -e "\e[32m    #  ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง   g เพื่อไปยังขั้นตอนถัดไป  #    "
 echo -e "\e[32m    #                                                   #    "
 echo -e "\e[32m    ================================= ====================  "
-echo -e "\e[0m         ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~        "
+echo -e "\e[0m      "
 read -n1 -r -p "                Press Enter To Show Commands                         "
 g
 
