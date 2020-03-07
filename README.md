@@ -1,4 +1,4 @@
-# pirakit
+# phutthasit​
 -
 - OpenSSH, port : 22, 80
 - Dropbear, port : 143, 444
@@ -11,4 +11,4 @@
 Auto-Install Script :
 -
 - sudo -i
-- wget https://raw.githubusercontent.com/MyGatherBk/pirakit/master/pirakit.sh && chmod +x pirakit.sh && bash pirakit.sh
+- wget https://raw.githubusercontent.com/phutthasit2530/openautog/master/phutthasit.sh && chmod +x phutthasit.sh && bash phutthasit.sh
