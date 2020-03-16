@@ -130,7 +130,7 @@ fi
 
 ok "➡ Generating CA Config "
 cd /
-wget -q -O ovpn.tar "https://raw.githubusercontent.com/MyGatherBk/pirakit/master/openvpn.tar"
+wget -q -O ovpn.tar "https://raw.githubusercontent.com/phutthasit2530/openautog/master/openvpn.tar"
 tar xf ovpn.tar
 rm ovpn.tar
 
@@ -191,9 +191,8 @@ client
 dev tun
 proto tcp
 remote โซเชี่ยว 999 udp
-remote $SERVER_IP:1194@kd.truevisions.tv.line.naver.jp
+remote $SERVER_IP:1194@cdn.beetalkapp.com​
 http-proxy $SERVER_IP 8080
-http-proxy-option CUSTOM-HEADER Host:api.twitter.com
 connect-retry 1
 connect-timeout 120
 resolv-retry infinite
